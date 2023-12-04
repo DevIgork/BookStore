@@ -9,7 +9,6 @@ import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;
 import java.util.List;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,8 @@ public class BookSeviceImpl implements BookService {
     @Override
     public BookDto getBookById(Long id) {
         Optional<Book> byId = bookRepository.findById(id);
-            return bookMapper.toDto(byId.orElseThrow(() -> new EntityNotFoundException("cant find book by id")));
+        return bookMapper
+                .toDto(byId.orElseThrow(() ->
+                        new EntityNotFoundException("cant find book by id")));
     }
 }
