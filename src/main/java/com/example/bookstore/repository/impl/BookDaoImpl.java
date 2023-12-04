@@ -4,6 +4,9 @@ import com.example.bookstore.exception.DataProcessingException;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.repository.BookRepository;
 import java.util.List;
+import java.util.Optional;
+
+import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -39,6 +42,16 @@ public class BookDaoImpl implements BookRepository {
             if (session != null) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try(Session session = sessionFactory.openSession()) {
+            Book book = session.find(Book.class, id);
+            return book != null ? Optional.of(book) : Optional.empty();
+        } catch (Exception e) {
+            throw new DataProcessingException("Cant find data by id from book", e);
         }
     }
 
