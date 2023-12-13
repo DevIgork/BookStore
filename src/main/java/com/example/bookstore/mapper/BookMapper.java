@@ -12,5 +12,7 @@ import org.springframework.stereotype.Component;
 public interface BookMapper {
     BookDto toDto(Book book);
 
+    Book toModel(BookDto bookDto);
+
     Book toModel(CreateBookRequestDto createBookRequestDto);
 }
