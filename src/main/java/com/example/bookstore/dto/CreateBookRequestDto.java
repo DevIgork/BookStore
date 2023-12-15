@@ -1,20 +1,21 @@
 package com.example.bookstore.dto;
 
-import java.math.BigDecimal;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
 public class CreateBookRequestDto {
-    @NotNull
+    @NotNull(message = " value can't be null")
     private String title;
-    @NotNull
+    @NotNull(message = " value can't be null")
     private String author;
-    @NotNull
+    @NotNull(message = " value can't be null")
+    @Size(min = 10, max = 13,message = " value can't be lower than 10 or more then 13")
     private String isbn;
-    @NotNull
+    @NotNull(message = " value can't be null")
     @Min(0)
     private BigDecimal price;
     private String description;
