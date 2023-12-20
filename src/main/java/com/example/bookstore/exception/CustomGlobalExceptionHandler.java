@@ -1,6 +1,5 @@
 package com.example.bookstore.exception;
 
-import com.example.bookstore.dto.ExceptionDto;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,8 +36,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(RegistrationException.class)
-    protected ExceptionDto handleRegistrationException(RegistrationException ex) {
-        return new ExceptionDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+    protected ResponseEntity<Object> handleRegistrationException(RegistrationException ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
     private String getErorrMessage(ObjectError e) {
