@@ -6,23 +6,24 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Data;
 import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 public class CreateBookRequestDto {
-    @NotNull(message = "value can't be null")
+    @Length(max = 255)
     @NotBlank(message = "value can't be blank")
     private String title;
-    @NotNull(message = "value can't be null")
+    @Length(max = 255)
     @NotBlank(message = "value can't be blank")
     private String author;
     @NotNull(message = " value can't be null")
-    @NotBlank(message = "value can't be blank")
     @ISBN(message = "value must be isbn")
     private String isbn;
     @NotNull(message = " value can't be null")
-    @NotBlank(message = "value can't be blank")
     @Positive(message = "value can't be negative")
     private BigDecimal price;
+    @Length(max = 255)
     private String description;
+    @Length(max = 255)
     private String coverImage;
 }
