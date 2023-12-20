@@ -11,10 +11,10 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class CreateBookRequestDto {
     @Length(max = 255)
-    @NotBlank(message = "value can't be blank")
+    @NotNull(message = "value can't be null")
     private String title;
     @Length(max = 255)
-    @NotBlank(message = "value can't be blank")
+    @NotNull(message = " value can't be null")
     private String author;
     @NotNull(message = " value can't be null")
     @ISBN(message = "value must be isbn")
