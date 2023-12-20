@@ -8,24 +8,19 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-@FieldMatch(field = "password", fieldMatch = "verifyPassword", message = "Passwords do not match!")
+@FieldMatch(first = "password", second = "repeatPassword", message = " do not match!")
 public class UserRegistrationRequestDto {
-    @NotBlank
     @Email
     private String email;
-    @NotBlank
-    @NotNull
+    @NotNull(message = " value can't be null")
     @Length(min = 8, max = 35)
     private String password;
-    @NotBlank
-    @NotNull
+    @NotNull(message = " value can't be null")
     @Length(min = 8, max = 35)
     private String repeatPassword;
-    @NotNull
-    @NotBlank
+    @NotNull(message = " value can't be null")
     private String firstName;
-    @NotNull
-    @NotBlank
+    @NotNull(message = " value can't be null")
     private String lastName;
     private String shipingAddress;
 }
