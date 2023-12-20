@@ -1,11 +1,10 @@
 package com.example.bookstore.exception;
 
+import com.example.bookstore.dto.ExceptionDto;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.example.bookstore.dto.ExceptionDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -36,10 +35,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("errors", errors);
         return new ResponseEntity<>(body, headers, status);
     }
+
     @ExceptionHandler(RegistrationException.class)
     protected ExceptionDto handleRegistrationException(RegistrationException ex) {
         return new ExceptionDto(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
+
     private String getErorrMessage(ObjectError e) {
         if (e instanceof FieldError) {
             String field = ((FieldError) e).getField();

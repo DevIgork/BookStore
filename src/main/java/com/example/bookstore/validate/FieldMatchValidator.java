@@ -1,6 +1,5 @@
 package com.example.bookstore.validate;
 
-import com.example.bookstore.exception.RegistrationException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.ValidationException;
@@ -22,21 +21,19 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
     @Override
     public boolean isValid(final Object value, final ConstraintValidatorContext context) {
         boolean valid = true;
-        try
-        {
+        try {
             final Object firstObj = BeanUtils.getProperty(value, firstFieldName);
             final Object secondObj = BeanUtils.getProperty(value, secondFieldName);
 
-            valid =  firstObj == null && secondObj == null || firstObj != null && firstObj.equals(secondObj);
-        }
-        catch (final Exception ignore)
-        {
+            valid = firstObj == null && secondObj == null
+                    || firstObj != null && firstObj.equals(secondObj);
+        } catch (final Exception ignore) {
             throw new ValidationException("can't check "
                     + firstFieldName + " and "
                     + secondFieldName + " if they the same");
         }
 
-        if (!valid){
+        if (!valid) {
             context.buildConstraintViolationWithTemplate(message)
                     .addPropertyNode(firstFieldName)
                     .addConstraintViolation()
