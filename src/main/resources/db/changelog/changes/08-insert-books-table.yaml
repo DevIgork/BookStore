@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-books-table
+      author: Igor Korolevich
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "The Clean Coder: A Code of Conduct for Professional Programmers"}
+              - column: {name: author, value: "Robert C. Martin"}
+              - column: {name: isbn, value: "9789669820229"}
+              - column: {name: price, value: "456"}
+              - column: {name: description, value: "A Code of Conduct for Professional Programmers, legendary software expert Robert C. Martin"}
+              - column: {name: cover_image, value: "https://balka-book.com/files/2023/07_06/12_56/u_files_store_5_7.jpg"}
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: title, value: "English is not easy" }
+              - column: { name: author, value: "Luci Gutiérrez" }
+              - column: { name: isbn, value: "9789669820228" }
+              - column: { name: price, value: "461" }
+              - column: { name: description, value: "If you want to finally start speaking English, but studying boring rules in textbooks drives you crazy, then this book is for you!" }
+              - column: { name: cover_image, value: "https://book-ye.com.ua/upload/resize_cache/iblock/21e/520_860_1/1f6d32c7_e05f_11e9_8121_000c29ae1566_73737abd_593d_11ed_8175_0050568ef5e6.jpg" }
