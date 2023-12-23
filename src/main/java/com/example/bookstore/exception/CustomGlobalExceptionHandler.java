@@ -36,6 +36,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    protected ResponseEntity<Object> handleRegistrationException(RegistrationException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+  
     @ExceptionHandler(EntityNotFoundException.class)
     protected ExceptionDto handleEntityNotFound(
             EntityNotFoundException ex
