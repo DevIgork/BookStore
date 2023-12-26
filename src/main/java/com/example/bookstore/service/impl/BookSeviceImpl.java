@@ -7,6 +7,7 @@ import com.example.bookstore.exception.EntityNotFoundException;
 import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.repository.BookRepository;
+import com.example.bookstore.repository.CategoryRepository;
 import com.example.bookstore.repository.impl.BookSpecificationBuilder;
 import com.example.bookstore.service.BookService;
 import java.util.List;
@@ -22,6 +23,7 @@ public class BookSeviceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BookDto createBook(CreateBookRequestDto createBookRequestDto) {
@@ -62,8 +64,19 @@ public class BookSeviceImpl implements BookService {
     }
 
     @Override
+    public List<BookDto> getBookByCategoriesId(Long id) {
+        if(categoryRepository.existsById(id)){
+            return bookRepository.getBookByCategoriesId(id).stream()
+                    .map(bookMapper::toDto)
+                    .toList();
+        }
+        throw new EntityNotFoundException("cant find book by this id " + id);
+    }
+
+    @Override
     public List<BookDto> search(BookSearchParameters searchParameters) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(searchParameters);
         return bookRepository.findAll(bookSpecification).stream().map(bookMapper::toDto).toList();
     }
+
 }
