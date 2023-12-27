@@ -3,6 +3,7 @@ package com.example.bookstore.controller;
 import com.example.bookstore.dto.category.CategoryDto;
 import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
+import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.service.BookService;
 import com.example.bookstore.service.CategoryService;
@@ -31,6 +32,7 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
     private final BookService bookService;
+    private final BookMapper bookMapper;
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @Operation(summary = "Get categories", description = "Get a list of all available categories")
@@ -71,6 +73,8 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("{id}/books")
     public List<Book> getBooksByCategoryId(@PathVariable Long id) {
-        return  bookService.
+        return bookService.getBookByCategoriesId(id).stream()
+                .map(bookMapper::toModel)
+                .toList();
     }
 }

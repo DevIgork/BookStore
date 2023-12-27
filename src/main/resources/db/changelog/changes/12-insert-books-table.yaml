@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-books-table
+      author: Igor Korolevich
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: title, value: "It"}
+              - column: {name: author, value: "Stephen King"}
+              - column: {name: isbn, value: "9781444707861"}
+              - column: {name: price, value: "670"}
+              - column: {name: description, value: " In the storm drains, in the sewers, IT lurked, taking on the shape of every nightmare, each one's deepest dread. Sometimes IT reached up, seizing, tearing, killing ...The adults, knowing better, knew nothing."}
+              - column: {name: cover_image, value: "https://balka-book.com/files/2021/05_03/21_39/u_files_store_1_503867.jpg"}
