@@ -4,6 +4,7 @@ import com.example.bookstore.dto.user.UserRegistrationRequestDto;
 import com.example.bookstore.dto.user.UserResponseDto;
 import com.example.bookstore.exception.RegistrationException;
 import com.example.bookstore.mapper.UserMapper;
+import com.example.bookstore.model.Role;
 import com.example.bookstore.model.User;
 import com.example.bookstore.repository.RoleRepository;
 import com.example.bookstore.repository.UserRepository;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toModel(requestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Set.of(roleRepository.findById(USER_ROLE_ID).get()));
+        user.setRoles(Set.of(roleRepository.findByRole(Role.RoleName.USER).get()));
         User savedUser = userRepository.save(user);
         return userMapper.toUserResponse(savedUser);
     }
