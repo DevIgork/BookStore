@@ -9,6 +9,12 @@ databaseChangeLog:
         - sqlCheck:
             expectedResult: 1
             sql: SELECT COUNT(*) FROM roles WHERE role='ADMIN'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM users WHERE email='igorkorolj33@gmail.com'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM roles WHERE role='USER'
       changes:
         - insert:
             tableName: users_roles
