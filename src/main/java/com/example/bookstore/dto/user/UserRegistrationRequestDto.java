@@ -26,5 +26,5 @@ public class UserRegistrationRequestDto {
     @Length(max = 255, message = "value max size is 255")
     private String lastName;
     @Length(max = 255, message = "value max size is 255")
-    private String shipingAddress;
+    private String shippingAddress;
 }

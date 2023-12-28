@@ -1,16 +1,18 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import com.example.bookstore.dto.category.CategoryDto;
 import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
 import com.example.bookstore.mapper.BookMapper;
-import com.example.bookstore.model.Book;
 import com.example.bookstore.service.BookService;
 import com.example.bookstore.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.data.domain.Pageable;
-import java.util.List;
 
 @Tag(name = "Categories management", description = "Endpoints for managing categories")
 @RestController
@@ -37,7 +37,7 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @Operation(summary = "Get categories", description = "Get a list of all available categories")
     @GetMapping
-    public List<CategoryResponseDto> getAll(Pageable pageable){
+    public List<CategoryResponseDto> getAll(Pageable pageable) {
         return categoryService.getAll(pageable);
     }
 
@@ -51,7 +51,7 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @Operation(summary = "Get category", description = "get category by id")
     @GetMapping("/{id}")
-    public CategoryDto getCategoryById(@PathVariable Long id){
+    public CategoryDto getCategoryById(@PathVariable Long id) {
         return categoryService.getById(id);
     }
 
@@ -72,9 +72,7 @@ public class CategoryController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("{id}/books")
-    public List<Book> getBooksByCategoryId(@PathVariable Long id) {
-        return bookService.getBookByCategoriesId(id).stream()
-                .map(bookMapper::toModel)
-                .toList();
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id) {
+        return bookService.getBookByCategoriesId(id);
     }
 }

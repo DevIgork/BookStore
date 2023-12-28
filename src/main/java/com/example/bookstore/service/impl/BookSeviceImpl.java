@@ -1,6 +1,7 @@
 package com.example.bookstore.service.impl;
 
 import com.example.bookstore.dto.book.BookDto;
+import com.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import com.example.bookstore.dto.book.BookSearchParameters;
 import com.example.bookstore.dto.book.CreateBookRequestDto;
 import com.example.bookstore.exception.EntityNotFoundException;
@@ -64,10 +65,10 @@ public class BookSeviceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getBookByCategoriesId(Long id) {
-        if(categoryRepository.existsById(id)){
+    public List<BookDtoWithoutCategoryIds> getBookByCategoriesId(Long id) {
+        if (categoryRepository.existsById(id)) {
             return bookRepository.getBookByCategoriesId(id).stream()
-                    .map(bookMapper::toDto)
+                    .map(bookMapper::toDtoWithoutCategory)
                     .toList();
         }
         throw new EntityNotFoundException("cant find book by this id " + id);
@@ -76,7 +77,10 @@ public class BookSeviceImpl implements BookService {
     @Override
     public List<BookDto> search(BookSearchParameters searchParameters) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(searchParameters);
-        return bookRepository.findAll(bookSpecification).stream().map(bookMapper::toDto).toList();
+        return bookRepository.findAll(bookSpecification)
+                .stream()
+                .map(bookMapper::toDto)
+                .toList();
     }
 
 }

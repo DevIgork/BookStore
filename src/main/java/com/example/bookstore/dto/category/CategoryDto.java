@@ -1,6 +1,5 @@
 package com.example.bookstore.dto.category;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

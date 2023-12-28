@@ -1,13 +1,10 @@
 package com.example.bookstore.service;
 
-import com.example.bookstore.dto.book.BookDto;
-import com.example.bookstore.dto.book.CreateBookRequestDto;
 import com.example.bookstore.dto.category.CategoryDto;
 import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 public interface CategoryService {
     List<CategoryResponseDto> getAll(Pageable pageable);

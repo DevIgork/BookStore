@@ -5,16 +5,14 @@ import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
 import com.example.bookstore.exception.EntityNotFoundException;
 import com.example.bookstore.mapper.CategoryMapper;
-import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
 import com.example.bookstore.repository.CategoryRepository;
 import com.example.bookstore.service.CategoryService;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -32,7 +30,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto getById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
-        return  categoryMapper.toDto(category.orElseThrow(() -> new EntityNotFoundException("cant find category by id " + id)));
+        return categoryMapper.toDto(category.orElseThrow(
+                () -> new EntityNotFoundException("cant find category by id " + id))
+        );
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteById(Long id) {
-      categoryRepository.deleteById(id);
+        categoryRepository.deleteById(id);
     }
 
     @Override

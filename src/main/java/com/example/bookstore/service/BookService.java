@@ -1,6 +1,7 @@
 package com.example.bookstore.service;
 
 import com.example.bookstore.dto.book.BookDto;
+import com.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import com.example.bookstore.dto.book.BookSearchParameters;
 import com.example.bookstore.dto.book.CreateBookRequestDto;
 import java.util.List;
@@ -19,6 +20,6 @@ public interface BookService {
   
     BookDto update(Long id, BookDto bookDto);
 
-    List<BookDto> getBookByCategoriesId(Long id);
+    List<BookDtoWithoutCategoryIds> getBookByCategoriesId(Long id);
   
 }

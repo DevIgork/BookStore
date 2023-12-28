@@ -23,3 +23,7 @@ databaseChangeLog:
       file: db/changelog/changes/11-create-books-categories-table.yaml
   - include:
       file: db/changelog/changes/12-insert-books-table.yaml
+  - include:
+      file: db/changelog/changes/13-insert-categories-table.yaml
+  - include:
+      file: db/changelog/changes/14-insert-books_categories.yaml
