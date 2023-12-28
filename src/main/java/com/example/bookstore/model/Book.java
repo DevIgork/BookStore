@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -26,14 +25,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @Column(nullable = false)
     private String title;
-    @NotNull
+    @Column(nullable = false)
     private String author;
-    @NotNull
     @Column(unique = true)
     private String isbn;
-    @NotNull
+    @Column(nullable = false)
     private BigDecimal price;
     private String description;
     private String coverImage;
