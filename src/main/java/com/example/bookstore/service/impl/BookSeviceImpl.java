@@ -11,6 +11,7 @@ import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CategoryRepository;
 import com.example.bookstore.repository.impl.BookSpecificationBuilder;
 import com.example.bookstore.service.BookService;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -74,10 +75,12 @@ public class BookSeviceImpl implements BookService {
         throw new EntityNotFoundException("cant find book by this id " + id);
     }
 
+    @Transactional
     @Override
-    public List<BookDto> search(BookSearchParameters searchParameters) {
+    public List<BookDto> search(Pageable pageable, BookSearchParameters searchParameters) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(searchParameters);
-        return bookRepository.findAll(bookSpecification)
+        return bookRepository.findAll(bookSpecification, pageable)
+                .toList()
                 .stream()
                 .map(bookMapper::toDto)
                 .toList();
