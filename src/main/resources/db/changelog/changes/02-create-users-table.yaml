@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-book-table
+      id: create-users-table
       author: Igor Korolevich
       changes:
         - createTable:
