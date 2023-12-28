@@ -2,7 +2,6 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import com.example.bookstore.dto.category.CategoryDto;
-import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
 import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.service.BookService;
@@ -37,7 +36,7 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @Operation(summary = "Get categories", description = "Get a list of all available categories")
     @GetMapping
-    public List<CategoryResponseDto> getAll(Pageable pageable) {
+    public List<CategoryDto> getAll(Pageable pageable) {
         return categoryService.getAll(pageable);
     }
 
@@ -45,7 +44,7 @@ public class CategoryController {
     @Operation(summary = "Create category", description = "create new category")
     @PostMapping
     public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto categoryDto) {
-        return categoryService.createBook(categoryDto);
+        return categoryService.createCategory(categoryDto);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")

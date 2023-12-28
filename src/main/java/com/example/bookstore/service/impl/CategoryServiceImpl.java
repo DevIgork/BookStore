@@ -1,7 +1,6 @@
 package com.example.bookstore.service.impl;
 
 import com.example.bookstore.dto.category.CategoryDto;
-import com.example.bookstore.dto.category.CategoryResponseDto;
 import com.example.bookstore.dto.category.CreateCategoryRequestDto;
 import com.example.bookstore.exception.EntityNotFoundException;
 import com.example.bookstore.mapper.CategoryMapper;
@@ -21,9 +20,9 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public List<CategoryResponseDto> getAll(Pageable pageable) {
+    public List<CategoryDto> getAll(Pageable pageable) {
         return categoryRepository.findAll(pageable).stream()
-                .map(categoryMapper::toResponseDto)
+                .map(categoryMapper::toDto)
                 .toList();
     }
 
@@ -36,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto createBook(CreateCategoryRequestDto categoryRequestDto) {
+    public CategoryDto createCategory(CreateCategoryRequestDto categoryRequestDto) {
         Category category = categoryMapper.toModel(categoryRequestDto);
         return categoryMapper.toDto(categoryRepository.save(category));
     }

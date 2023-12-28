@@ -33,6 +33,7 @@ public class BookSeviceImpl implements BookService {
         return bookMapper.toDto(bookRepository.save(book));
     }
 
+    @Transactional
     @Override
     public List<BookDto> getAll(Pageable pageable) {
         return bookRepository
