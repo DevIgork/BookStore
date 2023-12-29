@@ -12,7 +12,6 @@ databaseChangeLog:
                   constraints:
                     references: books(id)
                     foreignKeyName: fk_books_categories_book_id
-                    nullable: false
                     primaryKey: true
                     deleteCascade: true
               - column:
@@ -21,6 +20,5 @@ databaseChangeLog:
                   constraints:
                     references: categories(id)
                     foreignKeyName: fk_books_categories_category_id
-                    nullable: falsе
                     primaryKey: true
                     deleteCascade: true

@@ -12,7 +12,6 @@ databaseChangeLog:
                   constraints:
                     references: users(id)
                     foreignKeyName: fk_users_roles_user_id
-                    nullable: false
                     primaryKey: true
                     deleteCascade: true
               - column:
@@ -21,6 +20,5 @@ databaseChangeLog:
                   constraints:
                     references: roles(id)
                     foreignKeyName: fk_users_roles_role_id
-                    nullable: falsе
                     primaryKey: true
                     deleteCascade: true

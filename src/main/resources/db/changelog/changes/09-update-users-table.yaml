@@ -2,6 +2,13 @@ databaseChangeLog:
   -  changeSet:
        id: update-user
        author: igor_Korolevich
+       preConditions:
+         - sqlCheck:
+             expectedResult: 1
+             sql: SELECT COUNT(*) FROM users WHERE email='igorkorolj@gmail.com'
+         - sqlCheck:
+             expectedResult: 1
+             sql: SELECT COUNT(*) FROM users WHERE email='igorkorolj33@gmail.com'
        changes:
          -  update:
               tableName: users
