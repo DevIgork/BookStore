@@ -1,0 +1,19 @@
+databaseChangeLog:
+  -  changeSet:
+       id: update-user
+       author: igor_Korolevich
+       changes:
+         -  update:
+              tableName: users
+              columns:
+                -  column:
+                     name:  password
+                     value:  "$2a$10$SVoQ6xTHVJEs4Lgq4cvn9.Jc/oFEvL8H4hXzv.orZg8egCxABRoWe"
+              where: email='igorkorolj@gmail.com'
+         - update:
+             tableName: users
+             columns:
+               - column:
+                   name: password
+                   value: "$2a$10$g//4iePKLlA4R/9v7gl1d.dNjQVdY23BRQzqrtO8krglNJZci6EJG"
+             where: email='igorkorolj33@gmail.com'
