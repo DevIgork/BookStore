@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-categories-table
+      author: Igor Korolevich
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "education"}
+              - column: {name: description, value: "book for learning"}
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "horror"}
+              - column: {name: description, value: "a story in which the focus is on creating a feeling of fear"}

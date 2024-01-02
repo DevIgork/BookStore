@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-books-categories-table
+      author: Igor Korolevich
+      preConditions:
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM books WHERE title='English is not easy'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM books WHERE title LIKE 'The Clean Coder%'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM books WHERE title='It'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM categories WHERE name='horror'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM categories WHERE name='education'
+      changes:
+        - insert:
+            tableName: books_categories
+            columns:
+              - column:
+                  name: book_id
+                  valueComputed: (SELECT id FROM books WHERE title='English is not easy')
+              - column:
+                  name: category_id
+                  valueComputed: (SELECT id FROM categories WHERE name='education')
+        - insert:
+            tableName: books_categories
+            columns:
+              - column:
+                  name: book_id
+                  valueComputed: (SELECT id FROM books WHERE title LIKE 'The Clean Coder%' )
+              - column:
+                  name: category_id
+                  valueComputed: (SELECT id FROM categories WHERE name='education')
+        - insert:
+            tableName: books_categories
+            columns:
+              - column:
+                  name: book_id
+                  valueComputed: (SELECT id FROM books WHERE title='It')
+              - column:
+                  name: category_id
+                  valueComputed: (SELECT id FROM categories WHERE name='horror')

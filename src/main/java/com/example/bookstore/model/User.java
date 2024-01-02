@@ -15,12 +15,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
+@NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE id=?")
 @Where(clause = "is_deleted=false")
@@ -33,11 +35,15 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     @NotNull
+    @Column
     private String password;
     @NotNull
+    @Column
     private String firstName;
     @NotNull
+    @Column
     private String lastName;
+    @Column
     private String shippingAddress;
     @Column(nullable = false)
     private boolean isDeleted = false;
