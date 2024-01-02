@@ -1,25 +1,28 @@
 package com.example.bookstore.dto.book;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Data;
 import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 public class CreateBookRequestDto {
-    @NotNull(message = " value can't be null")
+    @Length(max = 255)
+    @NotNull(message = "value can't be null")
     private String title;
+    @Length(max = 255)
     @NotNull(message = " value can't be null")
     private String author;
     @NotNull(message = " value can't be null")
-    @Size(min = 10, max = 13,message = " value can't be lower than 10 or more then 13")
-    @ISBN
+    @ISBN(message = "value must be isbn")
     private String isbn;
     @NotNull(message = " value can't be null")
-    @Min(0)
+    @Positive(message = "value can't be negative")
     private BigDecimal price;
+    @Length(max = 255)
     private String description;
+    @Length(max = 255)
     private String coverImage;
 }
