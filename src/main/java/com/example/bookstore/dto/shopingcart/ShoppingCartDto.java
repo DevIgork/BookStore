@@ -1,6 +1,8 @@
-package com.example.bookstore.dto.shopingCart;
+package com.example.bookstore.dto.shopingcart;
 
+import java.util.List;
 import lombok.Data;
+
 @Data
 public class ShoppingCartDto {
     private long id;
