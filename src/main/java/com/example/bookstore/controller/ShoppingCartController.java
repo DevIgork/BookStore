@@ -30,7 +30,7 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Add item", description = "add item to cart "
             + "if cart not present create cart")
     @PostMapping
@@ -42,7 +42,7 @@ public class ShoppingCartController {
         return shoppingCartService.addToCart(requestDto, user.getId());
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Get cart", description = "Get a user cart")
     @GetMapping
     public ShoppingCartDto getCart(Authentication authentication) {
@@ -50,7 +50,7 @@ public class ShoppingCartController {
         return shoppingCartService.get(user.getId());
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "update cartItem", description = "update cart item by Id")
     @PutMapping("/cart-items/{cartItemId}")
     public CartItemDto updateCart(
@@ -60,7 +60,7 @@ public class ShoppingCartController {
         return shoppingCartService.update(cartItemId, requestDto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Delete cartItem", description = "delete cart item by Id")
     @DeleteMapping("/cart-items/{cartItemId}")
     public void deleteCartItem(@PathVariable Long cartItemId) {
