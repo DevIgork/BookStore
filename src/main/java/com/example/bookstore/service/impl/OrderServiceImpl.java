@@ -57,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
         Set<OrderItem> orderItems = new HashSet<>();
         OrderItem orderItem = new OrderItem();
         BigDecimal total = BigDecimal.ZERO;
+        orderItem.setOrder(order);
         for (CartItem cartItem : cartItems) {
             BigDecimal price = cartItem.getBook().getPrice();
             orderItem.setQuantity(cartItem.getQuantity());
@@ -65,12 +66,11 @@ public class OrderServiceImpl implements OrderService {
             total.add(price);
             orderItems.add(orderItem);
         }
-        orderItems.forEach(o -> o.setOrder(order));
         order.setOrderItem(orderItems);
         order.setTotal(total);
-        Order save = orderRepository.save(order);
+        orderRepository.save(order);
         orderItemRepository.saveAll(orderItems);
-        return orderMapper.toDto(save);
+        return orderMapper.toDto(order);
     }
 
     @Override
