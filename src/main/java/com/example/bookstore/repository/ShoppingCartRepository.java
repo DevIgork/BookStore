@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
-    Optional<ShoppingCart> findByUserId(Long userid);
+    Optional<ShoppingCart> findByUserId(Long userId);
 }
