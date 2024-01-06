@@ -1,5 +1,7 @@
 package com.example.bookstore.service.impl;
 
+import static com.example.bookstore.model.Order.Status.PENDING;
+
 import com.example.bookstore.dto.order.AddOrderRequestDto;
 import com.example.bookstore.dto.order.OrderDto;
 import com.example.bookstore.dto.order.UpdateOrderStatusDto;
@@ -17,16 +19,13 @@ import com.example.bookstore.repository.ShoppingCartRepository;
 import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.OrderService;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.example.bookstore.model.Order.Status.PENDING;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

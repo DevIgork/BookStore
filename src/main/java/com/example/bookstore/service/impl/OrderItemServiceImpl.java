@@ -6,11 +6,10 @@ import com.example.bookstore.mapper.OrderItemMapper;
 import com.example.bookstore.model.OrderItem;
 import com.example.bookstore.repository.OrderItemRepository;
 import com.example.bookstore.service.OrderItemService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +30,6 @@ public class OrderItemServiceImpl implements OrderItemService {
         OrderItem orderItem = orderItemRepository.findByIdAndOrderId(orderId, itemId)
                 .orElseThrow(() -> new EntityNotFoundException("Can't find order item by item id "
                         + itemId + " and order id" + orderId));
-        return  orderItemMapper.toDto(orderItem);
+        return orderItemMapper.toDto(orderItem);
     }
 }
