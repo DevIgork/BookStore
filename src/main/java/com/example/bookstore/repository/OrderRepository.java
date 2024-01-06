@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findByUserId(Long userId);
 
-    @Query("SELECT o FROM Order o JOIN FETCH o.orderItem WHERE o.user.id = :Userid")
+    @Query("SELECT o FROM Order o JOIN FETCH o.orderItem WHERE o.user.id = :userid")
     List<Order> findAllByUserId(Long userid);
 }
