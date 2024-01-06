@@ -58,7 +58,6 @@ public class ShopingCartServiceIml implements ShoppingCartService {
         return shoppingCartMapper.toDto(shoppingCartFromDB);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public ShoppingCartDto get(Long userId) {
         return shoppingCartMapper.toDto(
