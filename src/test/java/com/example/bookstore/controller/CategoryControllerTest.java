@@ -67,7 +67,7 @@ public class CategoryControllerTest {
     @WithMockUser(username = "User", roles = {"USER"})
     @Test
     @DisplayName("""
-            get all category
+            get all categories
             """)
     public void getAll_ValidData_Success() throws Exception {
         //given
@@ -94,7 +94,7 @@ public class CategoryControllerTest {
     @DisplayName("""
             create category
             """)
-    public void createBook_ValidData_Success() throws Exception {
+    public void createCategory_ValidData_Success() throws Exception {
         // Given
         CreateCategoryRequestDto requestDto = new CreateCategoryRequestDto()
                 .setName(BAD_CODE_NAME)

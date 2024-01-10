@@ -25,6 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BookControllerTest {
     protected static MockMvc mockMvc;
+
     private static final Long CLEAN_CODER_ID = 1L;
     private static final Long ENGLISH_NOT_EASY_ID = 2L;
     private static final Long IT_ID = 3L;
@@ -69,6 +70,7 @@ public class BookControllerTest {
     private static BookDto englishNotEasyDto;
     private static BookDto itDto;
     private static List<BookDto> bookDtos;
+
     @Autowired
     private ObjectMapper objectMapper;
 

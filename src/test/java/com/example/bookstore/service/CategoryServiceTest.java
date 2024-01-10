@@ -49,10 +49,10 @@ public class CategoryServiceTest {
     @BeforeAll
     public static void beforeAll() {
         education = new Category();
-        horror = new Category();
         education.setId(EDUCATION_ID);
         education.setName(EDUCATION_NAME);
         education.setDescription(EDUCATION_DESCRIPTION);
+        horror = new Category();
         horror.setDescription(HORROR_DESCRIPTION);
         horror.setName(HORROR_NAME);
         horror.setId(HORROR_ID);
@@ -70,14 +70,16 @@ public class CategoryServiceTest {
 
     @Test
     @DisplayName("""
-            verify getAll() method work
+            Get all categories return list of valid categoryDto
             """)
     public void getAll_validData_ReturnListOfCategory() {
         Pageable pageable = Pageable.ofSize(2);
         PageImpl<Category> categoryPage = new PageImpl<>(categories);
+
         when(categoryRepository.findAll(pageable)).thenReturn(categoryPage);
         when(categoryMapper.toDto(education)).thenReturn(educationDto);
         when(categoryMapper.toDto(horror)).thenReturn(horrorDto);
+
         List<CategoryDto> allCategory = categoryService.getAll(pageable);
         assertThat(allCategory).isEqualTo(categoryDtos);
         verify(categoryRepository, times(1)).findAll(pageable);
@@ -86,12 +88,14 @@ public class CategoryServiceTest {
 
     @Test
     @DisplayName("""
-            verify getById() method work
+            Get valid category by Id
             """)
     public void getCategoryById_ValidData_ReturnCategoryDto() {
-        Optional<Category> educationOprional = Optional.of(education);
-        when(categoryRepository.findById(EDUCATION_ID)).thenReturn(educationOprional);
+        Optional<Category> educationOptional = Optional.of(education);
+
+        when(categoryRepository.findById(EDUCATION_ID)).thenReturn(educationOptional);
         when(categoryMapper.toDto(education)).thenReturn(educationDto);
+
         CategoryDto categoryById = categoryService.getById(EDUCATION_ID);
         assertThat(categoryById).isEqualTo(educationDto);
         verify(categoryRepository, times(1)).findById(EDUCATION_ID);
@@ -100,7 +104,7 @@ public class CategoryServiceTest {
 
     @Test
     @DisplayName("""
-            verify createCategory() method work
+            Save a new category and return valid DTO
             """)
     public void createCategory_validData_ReturnCategoryId() {
         CreateCategoryRequestDto categoryRequestDto = new CreateCategoryRequestDto()

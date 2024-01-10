@@ -50,24 +50,23 @@ public class BookServiceTest {
             "A Code of Conduct for Professional Programmers,"
             + " legendary software expert Robert C. Martin";
     private static final String CLEAN_CODER_COVER_IMAGE = "https://balka-book.com/files/2023/07_06/12_56/u_files_store_5_7.jpg";
+
     private static Book englishNotEasy;
     private static Book cleanCoder;
     private static BookDto englishNotEasyDto;
     private static BookDto cleanCoderDto;
     private static List<Book> books;
     private static List<BookDto> bookDtos;
-    @InjectMocks
-    private BookSeviceImpl bookSevice;
 
     @Mock
     private BookRepository bookRepository;
-
     @Mock
     private BookMapper bookMapper;
+    @InjectMocks
+    private BookSeviceImpl bookService;
 
     @BeforeAll
     public static void beforeAll() {
-        englishNotEasy = new Book();
         englishNotEasyDto = new BookDto()
                 .setId(ENGLISH_NOT_EASY_ID)
                 .setPrice(ENGLISH_NOT_EASY_PRICE)
@@ -92,6 +91,7 @@ public class BookServiceTest {
         cleanCoder.setIsbn(CLEAN_CODER_ISBN);
         cleanCoder.setDescription(CLEAN_CODER_DESCRIPTION);
         cleanCoder.setCoverImage(CLEAN_CODER_COVER_IMAGE);
+        englishNotEasy = new Book();
         englishNotEasy.setId(ENGLISH_NOT_EASY_ID);
         englishNotEasy.setPrice(ENGLISH_NOT_EASY_PRICE);
         englishNotEasy.setTitle(ENGLISH_NOT_EASY_TITLE);
@@ -105,7 +105,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("""
-            verify createBook() method work
+            Save a new book and return valid DTO
             """)
     public void createBook_validCreateBookRequestDto_ReturnBookDto() {
         CreateBookRequestDto createBookRequestDto = new CreateBookRequestDto()
@@ -120,7 +120,7 @@ public class BookServiceTest {
         when(bookRepository.save(cleanCoder)).thenReturn(cleanCoder);
         when(bookMapper.toDto(cleanCoder)).thenReturn(cleanCoderDto);
 
-        BookDto savedBookDto = bookSevice.createBook(createBookRequestDto);
+        BookDto savedBookDto = bookService.createBook(createBookRequestDto);
         assertThat(savedBookDto).isEqualTo(cleanCoderDto);
         verify(bookRepository, times(1)).save(cleanCoder);
         verifyNoMoreInteractions(bookRepository, bookMapper);
@@ -128,15 +128,17 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("""
-            verify getAll() method work
+            Get all books return list of valid bookDto
             """)
     public void get_validData_returnListOfBookDto() {
         Pageable pageable = Pageable.ofSize(2);
         PageImpl<Book> bookPage = new PageImpl<>(books);
+
         when(bookRepository.findAll(pageable)).thenReturn(bookPage);
         when(bookMapper.toDto(books.get(0))).thenReturn(cleanCoderDto);
         when(bookMapper.toDto(books.get(1))).thenReturn(englishNotEasyDto);
-        List<BookDto> all = bookSevice.getAll(pageable);
+
+        List<BookDto> all = bookService.getAll(pageable);
         assertThat(all).isEqualTo(bookDtos);
         verify(bookRepository, times(1)).findAll(pageable);
         verifyNoMoreInteractions(bookRepository, bookMapper);
@@ -144,13 +146,15 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("""
-            verify getBookById() method work
+            Get valid bookDto by id
             """)
     public void getBookById_ValidData_ReturnBookDto() {
         Optional<Book> clearCoderOptional = Optional.of(cleanCoder);
+
         when(bookRepository.findById(CLEAN_CODER_ID)).thenReturn(clearCoderOptional);
         when(bookMapper.toDto(cleanCoder)).thenReturn(cleanCoderDto);
-        BookDto bookByIdDto = bookSevice.getBookById(CLEAN_CODER_ID);
+
+        BookDto bookByIdDto = bookService.getBookById(CLEAN_CODER_ID);
         assertThat(bookByIdDto).isEqualTo(cleanCoderDto);
         verify(bookRepository, times(1)).findById(CLEAN_CODER_ID);
         verifyNoMoreInteractions(bookRepository, bookMapper);
