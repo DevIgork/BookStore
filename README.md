@@ -41,7 +41,7 @@ docker-compose up
 ```code
   GET "/api/books"
 ```
-return all books in database
+return all books from database
 
 *************************
 
@@ -135,7 +135,7 @@ update book data in database
 ```code
   GET "/api/books/search?title=titles&author=authors"
 ```
-get books by book params like title or author
+get books by book params like title or author from database
 *****
 #### Get categories  (USER, ADMIN)
 
