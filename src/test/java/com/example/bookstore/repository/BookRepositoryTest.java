@@ -49,7 +49,6 @@ class BookRepositoryTest {
     @BeforeAll
     static void initialBooks() {
         cleanCoder = new Book();
-        englishNotEasy = new Book();
         cleanCoder.setId(CLEAN_CODER_ID);
         cleanCoder.setPrice(CLEAN_CODER_PRICE);
         cleanCoder.setTitle(CLEAN_CODER_TITLE);
@@ -57,6 +56,7 @@ class BookRepositoryTest {
         cleanCoder.setIsbn(CLEAN_CODER_ISBN);
         cleanCoder.setDescription(CLEAN_CODER_DESCRIPTION);
         cleanCoder.setCoverImage(CLEAN_CODER_COVER_IMAGE);
+        englishNotEasy = new Book();
         englishNotEasy.setId(ENGLISH_NOT_EASY_ID);
         englishNotEasy.setPrice(ENGLISH_NOT_EASY_PRICE);
         englishNotEasy.setTitle(ENGLISH_NOT_EASY_TITLE);
@@ -71,8 +71,8 @@ class BookRepositoryTest {
                     get books by categories id
                     """)
     void getBookByCategoriesId_TwoCategories_ReturnListOneBook() {
-        List<Book> actual = bookRepository.findBookByCategoriesId(EDUCATION_CATEGORY_ID);
         List<Book> expected = List.of(cleanCoder, englishNotEasy);
+        List<Book> actual = bookRepository.findBookByCategoriesId(EDUCATION_CATEGORY_ID);
         Assertions.assertEquals(2, actual.size());
         Assertions.assertEquals(expected, actual);
     }
