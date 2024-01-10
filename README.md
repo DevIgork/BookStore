@@ -1,11 +1,14 @@
 
-# Book_Store
-
-This project is the backend part of the bookstore, it implements security, roles, categories, the ability to add books to the cart, place an order, project have tests and uses such a programming pattern as rest api
 
 
+![Book store text](https://lmcst.ac.in/wp-content/uploads/2017/01/bookstall-banner.jpg)
+# Book_Store 📚
 
-## Tech Stack
+This project is the back-end part of the bookstore using spring, it implements security, roles, categories, the ability to add books to the cart, place an order, project have tests, Swagger, Tomcat and uses such a programming pattern as rest api more below.
+
+
+
+## Tech Stack 💎
 **Language** Java
 
 **Accessing Data** Spring Data JPA, Hibernate, MySQL
@@ -23,7 +26,15 @@ This project is the backend part of the bookstore, it implements security, roles
 **Security** Spring Security
 
 
-## API Reference
+## Deployment 💻
+
+To deploy this project simple install doker to your pc pull this git hub project and add your dependency to .env file and to application.properties and run command
+```bash
+docker-compose up
+```
+
+
+## API Reference 📄
 
 #### Get all book (ADMIN, USER)
 
@@ -341,6 +352,15 @@ body:
 delete cartItem from cart
 
 *******
+## 📜How project was developed 📜
+![App Screenshot](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW9lNWU1N3plaHdvM2NpaDBoYmZhbjA4N2ozeHd5cnN1YXg2NHZsaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UQ84N6dIWObZWILqsE/giphy.gif)
+
+It was my first back-end project, and it was very interesting to implement it, and during the development I encountered some blockers, but thanks to my mentors I was able to overcome them, and I am very grateful to them.
+
+#### spring security
+when adding a security token, namely jwt token, there was a problem that the user could not submit a request on the token because the Expiration in the token was not set correctly and the user could not log in, but together with the mentor we found the reason in the Value annotation and fixed it
+#### Test
+when I added tests to my project, there was also a problem at the controller level that further (User) authentication.getPrincipal(); it did not go in and threw an error, but after an hour of googling, I found a solution that I needed to add user to Authentication and then to SecurityContextHolder before the test.
 ## 🔗 Links
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/igor-korolevich-2b3b25175/)
