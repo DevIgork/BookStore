@@ -85,7 +85,11 @@ public class OrderServiceImpl implements OrderService {
         return total;
     }
 
-    private void fillOrderItems(Set<CartItem> cartItems, Set<OrderItem> orderItems, OrderItem orderItem) {
+    private void fillOrderItems(
+            Set<CartItem> cartItems,
+            Set<OrderItem> orderItems,
+            OrderItem orderItem
+    ) {
         for (CartItem cartItem : cartItems) {
             BigDecimal price = cartItem.getBook().getPrice();
             orderItem.setQuantity(cartItem.getQuantity());
