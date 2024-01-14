@@ -86,7 +86,7 @@ public class ShoppingCartControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     @Test
     @DisplayName("""
-            add to cart
+            Add to cart, valid data
             """)
     public void addToCart_ValidData_Success() throws Exception {
         AddToCartRequestDto requestDto = new AddToCartRequestDto()
