@@ -42,8 +42,6 @@ public class ShoppingCartServiceTest {
                     + " legendary software expert Robert C. Martin";
     private static final String CLEAN_CODER_COVER_IMAGE = "https://balka-book.com/files/2023/07_06/12_56/u_files_store_5_7.jpg";
     private static Book cleanCoder;
-    @InjectMocks
-    private ShoppingCartServiceImpl cartService;
     @Mock
     private ShoppingCartRepository cartRepository;
     @Mock
@@ -54,6 +52,8 @@ public class ShoppingCartServiceTest {
     private UserRepository userRepository;
     @Mock
     private CartItemRepository cartItemRepository;
+    @InjectMocks
+    private ShoppingCartServiceImpl cartService;
 
     @BeforeAll
     public static void beforeAll() {
@@ -69,7 +69,7 @@ public class ShoppingCartServiceTest {
 
     @Test
     @DisplayName("""
-            verify addToCart() method work
+            Add cart item to shopping cart, valid data
             """)
     public void addToCart_ValidData_Success() {
         AddToCartRequestDto requestDto = new AddToCartRequestDto()
@@ -91,11 +91,13 @@ public class ShoppingCartServiceTest {
         ShoppingCartDto shoppingCartDto = new ShoppingCartDto()
                 .setCartItem(List.of(cartItemDto))
                 .setUserId(1L);
+
         when(bookRepository.findById(1L)).thenReturn(Optional.ofNullable(cleanCoder));
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(cartRepository.findByUserId(1L)).thenReturn(Optional.of(shoppingCart));
         when(cartItemRepository.save(cartItem)).thenReturn(cartItem);
         when(cartMapper.toDto(shoppingCart)).thenReturn(shoppingCartDto);
+
         ShoppingCartDto actual = cartService.addToCart(requestDto, 1L);
         assertThat(actual).isEqualTo(shoppingCartDto);
         verifyNoMoreInteractions(bookRepository, cartRepository, cartItemRepository, cartMapper);
