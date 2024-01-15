@@ -357,6 +357,7 @@ delete cartItem from cart
 *******
 ## 📜How project was developed 📜
 ![App Screenshot](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW9lNWU1N3plaHdvM2NpaDBoYmZhbjA4N2ozeHd5cnN1YXg2NHZsaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UQ84N6dIWObZWILqsE/giphy.gif)
+
 It was my first back-end project, and it was very interesting to implement it, and during the development I encountered some blockers, but thanks to my mentors I was able to overcome them, and I am very grateful to them.
 
 #### spring security
