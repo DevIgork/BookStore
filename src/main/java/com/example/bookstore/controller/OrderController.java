@@ -54,7 +54,7 @@ public class OrderController {
     @PatchMapping("{id}")
     public OrderDto updateStatus(
             @PathVariable Long id,
-            @RequestBody UpdateOrderStatusDto updateOrderStatusDto
+            @RequestBody @Valid UpdateOrderStatusDto updateOrderStatusDto
     ) {
         return orderService.update(updateOrderStatusDto, id);
     }

@@ -2,6 +2,7 @@ package com.example.bookstore.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,12 +31,12 @@ public class ShoppingCart {
     private Long id;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "shoppingCart")
+    @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.LAZY)
     private Set<CartItem> cartItem = new HashSet<>();
     @Column(nullable = false)
     private boolean isDeleted = false;

@@ -16,10 +16,10 @@ import com.example.bookstore.repository.CartItemRepository;
 import com.example.bookstore.repository.ShoppingCartRepository;
 import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.service.ShoppingCartService;
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,7 +58,7 @@ public class ShopingCartServiceIml implements ShoppingCartService {
         return shoppingCartMapper.toDto(shoppingCartFromDB);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public ShoppingCartDto get(Long userId) {
         return shoppingCartMapper.toDto(

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-orders-table
+      id: create-order-items-table
       author: Igor Korolevich
       changes:
         - createTable:

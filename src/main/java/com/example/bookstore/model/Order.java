@@ -44,6 +44,7 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal total;
     @CreationTimestamp
+    @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
     @Column(nullable = false)
     private String shippingAddress;
