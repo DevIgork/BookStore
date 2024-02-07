@@ -16,7 +16,7 @@ databaseChangeLog:
             tableName: books
             columns:
               - column: { name: title, value: "English is not easy" }
-              - column: { name: author, value: "Luci Gutiérrez" }
+              - column: { name: author, value: "Luci Gutierrez" }
               - column: { name: isbn, value: "9789669820228" }
               - column: { name: price, value: "461" }
               - column: { name: description, value: "If you want to finally start speaking English, but studying boring rules in textbooks drives you crazy, then this book is for you!" }
